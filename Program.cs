@@ -10,10 +10,14 @@ namespace BookStore.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            //Configuration for using JSON File
+            builder.Configuration.AddJsonFile("appsettings.json", optional: false);
+            var configuration = builder.Configuration;
+
+            // ConfigureService() (Startup.cs Deprecated above .Net 5.0)
 
             //Adding the Custom Repository and adding connection string
-            builder.Services.AddDbContext<BookStoreContext>(options=>options.UseSqlServer("Server=.;Databse=BookStoreAPI;Integrated Security= True")); 
+            builder.Services.AddDbContext<BookStoreContext>(options=>options.UseSqlServer(configuration.GetConnectionString("BookStoreDB"))); 
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,6 +29,7 @@ namespace BookStore.API
 
             var app = builder.Build();
 
+            // Configure() (Startup.cs Deprecated above .Net 5.0)
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
