@@ -1,5 +1,6 @@
 ﻿using BookStore.API.Data;
 using BookStore.API.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.API.Repository
@@ -33,6 +34,19 @@ namespace BookStore.API.Repository
             }).FirstOrDefaultAsync();
 
             return records;
+        }
+
+        public async Task<int> AddBookAsync(BookModel bookModel)
+        {
+            var book = new Books()
+            {
+                Title = bookModel.Title,
+                Description = bookModel.Description,
+            };
+            _context.Books.Add(book);
+            await _context.SaveChangesAsync();
+
+            return book.Id;
         }
     }
 }
