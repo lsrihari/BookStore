@@ -48,5 +48,18 @@ namespace BookStore.API.Repository
 
             return book.Id;
         }
+
+        public async Task UpdateBookAsync(int bookId, BookModel bookModel)
+        {
+            var book = await _context.Books.FindAsync(bookId);
+            if(book != null)
+            {
+                book.Title = bookModel.Title;
+                book.Description = bookModel.Description;
+
+                await _context.SaveChangesAsync();
+            }
+
+        }
     }
 }
