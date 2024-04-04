@@ -30,6 +30,15 @@ namespace BookStore.API
             //AutoMapper
             builder.Services.AddAutoMapper(typeof(Program));
 
+            //CORS Policy
+            builder.Services.AddCors(option =>
+            {
+                option.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
             var app = builder.Build();
 
             // Configure() (Startup.cs Deprecated above .Net 5.0)
@@ -42,8 +51,9 @@ namespace BookStore.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors();
 
+            app.UseAuthorization();
 
             app.MapControllers();
 
