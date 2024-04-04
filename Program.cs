@@ -27,6 +27,9 @@ namespace BookStore.API
             //Adding Custom Configuration
             builder.Services.AddTransient<IBookRepository,BookRepository>();
 
+            //AutoMapper
+            builder.Services.AddAutoMapper(typeof(Program));
+
             var app = builder.Build();
 
             // Configure() (Startup.cs Deprecated above .Net 5.0)

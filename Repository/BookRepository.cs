@@ -1,4 +1,5 @@
-﻿using BookStore.API.Data;
+﻿using AutoMapper;
+using BookStore.API.Data;
 using BookStore.API.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -9,13 +10,17 @@ namespace BookStore.API.Repository
     public class BookRepository : IBookRepository
     {
         private readonly BookStoreContext _context;
-        public BookRepository(BookStoreContext context)
+        private readonly IMapper _mapper;
+
+        public BookRepository(BookStoreContext context, IMapper mapper)
         {
             this._context = context;
+            this._mapper = mapper;
         }
         public async Task<List<BookModel>> GetAllBooksAsync()
         {
-            var records = await _context.Books.Select(x => new BookModel()
+            /*
+             var records = await _context.Books.Select(x => new BookModel()
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -23,10 +28,16 @@ namespace BookStore.API.Repository
             }).ToListAsync();
 
             return records;
+            */
+
+            //Using AutoMapper
+            var records = await _context.Books.ToListAsync();
+            return _mapper.Map<List<BookModel>>(records);
         }
 
         public async Task<BookModel> GetBookAsync(int bookId)
         {
+            /*
             var records = await _context.Books.Where(x => x.Id == bookId).Select(x => new BookModel() //FindAsync(bookId) works only on primarykey column 
             {
                 Id = x.Id,
@@ -35,6 +46,11 @@ namespace BookStore.API.Repository
             }).FirstOrDefaultAsync();
 
             return records;
+            */
+
+            //Using AutoMapper
+            var book = await _context.Books.FindAsync(bookId);
+            return _mapper.Map<BookModel>(book);
         }
 
         public async Task<int> AddBookAsync(BookModel bookModel)

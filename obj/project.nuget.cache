@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "KZQ0KpN/iOmykoADL/49Yg0x4ZpCU1a4mE4N1v2EUjz2YLxj8yA+81aDxUUR3HLK3Mdkjjy2KL6IPQBqMwRmgA==",
+  "dgSpecHash": "B9EalJv8fB54sCHybWNoY0K9FiFyWOHZxLFd79u6bSJufgaMa57Vd3yHhEiiL64LdCsQyBsd00OP6RHhud/G7A==",
   "success": true,
   "projectFilePath": "D:\\Study\\BookStore.API\\BookStore.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\v-sriharil\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\v-sriharil\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\v-sriharil\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\v-sriharil\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\v-sriharil\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

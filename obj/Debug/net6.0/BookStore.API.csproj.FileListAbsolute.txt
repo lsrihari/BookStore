@@ -90,3 +90,5 @@ D:\Study\BookStore.API\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 D:\Study\BookStore.API\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\Study\BookStore.API\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\Study\BookStore.API\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+D:\Study\BookStore.API\bin\Debug\net6.0\AutoMapper.dll
+D:\Study\BookStore.API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
