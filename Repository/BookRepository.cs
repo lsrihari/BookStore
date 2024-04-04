@@ -1,18 +1,19 @@
 ﻿using BookStore.API.Data;
 using BookStore.API.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.API.Repository
 {
-    public class BookRepository: IBookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly BookStoreContext _context;
         public BookRepository(BookStoreContext context)
         {
             this._context = context;
         }
-        public async Task <List<BookModel>> GetAllBooksAsync()
+        public async Task<List<BookModel>> GetAllBooksAsync()
         {
             var records = await _context.Books.Select(x => new BookModel()
             {
@@ -26,7 +27,7 @@ namespace BookStore.API.Repository
 
         public async Task<BookModel> GetBookAsync(int bookId)
         {
-            var records = await _context.Books.Where(x=>x.Id == bookId).Select(x => new BookModel() //FindAsync(bookId) works only on primarykey column 
+            var records = await _context.Books.Where(x => x.Id == bookId).Select(x => new BookModel() //FindAsync(bookId) works only on primarykey column 
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -63,13 +64,22 @@ namespace BookStore.API.Repository
 
             var book = new Books()
             {
-                Id=bookId,
+                Id = bookId,
                 Title = bookModel.Title,
                 Description = bookModel.Description,
             };
             _context.Books.Update(book);
             await _context.SaveChangesAsync();
+        }
 
+        public async Task UpdateBookPatchAsync(int bookId, JsonPatchDocument bookModel)
+        {
+            var book =await _context.Books.FindAsync(bookId);
+            if(book != null)
+            {
+                bookModel.ApplyTo(book);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }
