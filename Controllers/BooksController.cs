@@ -3,11 +3,13 @@ using BookStore.API.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookStore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] //Authorize at controller level
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
